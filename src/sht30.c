@@ -48,7 +48,7 @@ static void read_setup_requested(void* context, bool success)
   reinterpret(self, context, sht30_t*);
 
   if(success) {
-    tiny_timer_start(self->timer_group, &self->timer, read_setup_delay, read_setup_complete, self);
+    tiny_timer_start(self->timer_group, &self->timer, read_setup_delay, self, read_setup_complete);
   }
   else {
     self->callback(self->context, false, 0, 0);
@@ -58,7 +58,7 @@ static void read_setup_requested(void* context, bool success)
 static void set_up_read(sht30_t* self)
 {
   static const uint8_t request[] = { 0x2C, 0x06 };
-  tiny_async_i2c_write(self->i2c, self->address, false, request, sizeof(request), read_setup_requested, self);
+  tiny_async_i2c_write(self->i2c, self->address, false, request, sizeof(request), self, read_setup_requested);
 }
 
 void sht30_read(sht30_t* self, sht30_callback_t callback, void* context)
