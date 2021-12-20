@@ -4,8 +4,6 @@
  */
 
 #include "aip1640_8x8_matrix.h"
-#include "stm8s.h"
-#include "stm8s_gpio.h"
 
 enum {
   max_intensity = aip1640_8x8_matrix_max_intensity
