@@ -1,4 +1,4 @@
-__lib_tiny-devices_path := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
+__lib_tiny-devices_path := $(subst $(shell pwd)/,,$(dir $(realpath $(lastword $(MAKEFILE_LIST)))))
 
 LIBS := tiny-devices $(LIBS)
 
