@@ -36,10 +36,9 @@ static void read_complete(void* context, bool success)
   self->callback(self->context, success, temperature_c, humidity);
 }
 
-static void read_setup_complete(tiny_timer_group_t* timer_group, void* context)
+static void read_setup_complete(void* context)
 {
   reinterpret(self, context, async_sht30_t*);
-  (void)timer_group;
   tiny_async_i2c_read(self->i2c, self->address, false, self->read_buffer, sizeof(self->read_buffer), self, read_complete);
 }
 
