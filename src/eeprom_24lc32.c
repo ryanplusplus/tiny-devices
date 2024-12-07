@@ -13,7 +13,7 @@ void eeprom_24lc32_init(eeprom_24lc32_t* self, i_tiny_i2c_t* i2c, uint8_t addres
 
 bool eeprom_24lc32_write(eeprom_24lc32_t* self, uint16_t address, uint8_t value)
 {
-  uint8_t write[] = { address >> 8, address & 0xFF, value };
+  uint8_t write[] = { (uint8_t)(address >> 8), (uint8_t)(address & 0xFF), value };
   if(!tiny_i2c_write(self->i2c, self->address, false, write, sizeof(write))) {
     return false;
   }
@@ -31,7 +31,7 @@ bool eeprom_24lc32_write(eeprom_24lc32_t* self, uint16_t address, uint8_t value)
 
 bool eeprom_24lc32_read(eeprom_24lc32_t* self, uint16_t address, uint8_t* value)
 {
-  uint8_t read_address[] = { address >> 8, address & 0xFF };
+  uint8_t read_address[] = { (uint8_t)(address >> 8), (uint8_t)(address & 0xFF) };
   if(!tiny_i2c_write(self->i2c, self->address, true, read_address, sizeof(read_address))) {
     return false;
   }

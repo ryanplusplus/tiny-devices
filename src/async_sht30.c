@@ -20,12 +20,12 @@ void async_sht30_init(async_sht30_t* self, tiny_timer_group_t* timer_group, i_ti
 
 static inline uint16_t to_temperature_c(uint8_t msb, uint8_t lsb)
 {
-  return ((((uint32_t)msb << 8) + lsb) * 175) / 655 - 4500;
+  return (uint16_t)(((((uint32_t)msb << 8) + lsb) * 175) / 655 - 4500);
 }
 
 static inline uint16_t to_humidity(uint8_t msb, uint8_t lsb)
 {
-  return ((((uint32_t)msb << 8) + lsb) * 100) / 655;
+  return (uint16_t)(((((uint32_t)msb << 8) + lsb) * 100) / 655);
 }
 
 static void read_complete(void* context, bool success)
